@@ -24,6 +24,7 @@ class game
                      {x1,9},{x2,9},{x3,9},{x4,9},
                      {x1,18},{x2,18},{x3,18},{x4,18}};
 	int score = 0;
+	bool over = false;
 	public:
 		void display()
 		{
@@ -33,7 +34,14 @@ class game
 			while(1)
 			{
 				cleardevice();
-
+				
+                		if (over)
+		                {
+                	    		settextstyle(0,0,3);
+                    			outtextxy(mx/2-100,my/2-50,"Game Over");
+                    			break;
+                		}
+				
 				show_spaceship(x,y);
 				show_enemies();
 				show_bullets();
@@ -105,6 +113,10 @@ class game
 			for(int i = 0;i<enemy.size();i++)
 			{
 				bar(enemy[i][0],enemy[i][1],enemy[i][0]+40,enemy[i][1]+5);
+				if (enemy[i][1] >= my/2+150)
+                {
+                    over = true;
+                }
 			}
 		}
 		void move_enemies()
